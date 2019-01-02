@@ -16,7 +16,8 @@ If you use the data or code from this repo, please cite the following paper:
 
 ## Data ##
 
-Feature vectors for two question answering benchmarks, TREC QA and WikiQA, are made available in the directory `data`.  The vectors are stored in the SVMLight format, and released in a compressed form (`.svm.gz`).
+Feature vectors for two question answering benchmarks, TREC QA and WikiQA, are made available in the directory `data`.
+The vectors are stored in the SVMLight format, and released in a compressed form (`.svm.gz`).
 
 A complete list of 21 external features (and the respective feature IDs) are given as follows:
 
@@ -43,3 +44,30 @@ A complete list of 21 external features (and the respective feature IDs) are giv
 21. MatchedNGram[k=3,n=3]
 
 > The data is _NOT_ filtered in any way.  Some prior works remove questions with no positive answers, so additional care needs to be taken when making comparison with or incorporating this data into those approaches.
+
+## Feature Extraction ##
+
+Feature extraction scripts (all in python 3) are also available in the `data` directory. 
+Follow these steps to rerun the extraction pipeline:
+
+- Extract frequency counts from the GOV2 collection, and store the counts in compressed format
+  in the file `freqstats.gz`. One can simply index the collection using Indri and then use its
+  utility `dump_index` to do the work:
+
+      dumpindex /path/to/index v | gzip > freqstats.gz
+   
+- Build an Indri index over English Wikipedia pages. This can be done by first downloading an [enwiki data
+  dump](https://dumps.wikimedia.org/enwiki/) and then converting wikipages into TRECTEXT format,
+  using DOCNO of the form `ENWIKI_XXXXXXXX` (where `XXXXXXXX` indicates the wikipage number).
+  
+  The enwiki dump used in our experiment was produced in October 2015.
+  
+- Download and uncompress the pretrained word2vec model [GoogleNews-vectors-negative300.bin](https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing)
+  
+- Sign up for the [TAGME service](https://tagme.d4science.org/tagme/) to obtain a TAGME token.
+  
+- Modify the _Configurations_ section of `Makefile` to reflect the local changes.
+  Then run the task specific targets:
+
+      make trecqa
+      make wikiqa
