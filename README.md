@@ -16,35 +16,30 @@ If you use the data or code from this repo, please cite the following paper:
 
 ## Data ##
 
-Feature vectors for two question answering benchmarks, TREC QA and WikiQA, are made available in the directory `data`.  The vectors are stored in the SVMLight format, and released in a compressed form (`.gz`).
+Feature vectors for two question answering benchmarks, TREC QA and WikiQA, are made available in the directory `data`.  The vectors are stored in the SVMLight format, and released in a compressed form (`.svm.gz`).
 
-The data is _NOT_ filtered in any way.  Some prior works remove questions with no positive answers, so additional care needs to be taken when making comparison with or incorporating this data into those approaches.
-
-A complete list of 22 external features (and the respective feature IDs) are given as follows:
+A complete list of 21 external features (and the respective feature IDs) are given as follows:
 
 1. Length
-2. Location
-3. ExactMatch
-4. Overlap
-5. OverlapSyn
-6. LM
-7. BM25
-8. ESA
-9. TAGME
-10. Word2Vec
-11. CPW
-12. SPW
-13. WPS
-14. CWPS
-15. CWR
-16. LWPS
-17. LWR
-18. DaleChall
-19. MatchedNGram[k=2,n=2]
-20. MatchedNGram[k=2,n=3]
-21. MatchedNGram[k=3,n=2]
-22. MatchedNGram[k=3,n=3]
+2. ExactMatch
+3. Overlap
+4. OverlapSyn
+5. LM
+6. BM25
+7. ESA
+8. TAGME
+9. Word2Vec
+10. CPW
+11. SPW
+12. WPS
+13. CWPS
+14. CWR
+15. LWPS
+16. LWR
+17. DaleChall
+18. MatchedNGram[k=2,n=2]
+19. MatchedNGram[k=2,n=3]
+20. MatchedNGram[k=3,n=2]
+21. MatchedNGram[k=3,n=3]
 
-## Note ##
-
-Code for feature extraction is to be made available soon.
+> The data is _NOT_ filtered in any way.  Some prior works remove questions with no positive answers, so additional care needs to be taken when making comparison with or incorporating this data into those approaches.
