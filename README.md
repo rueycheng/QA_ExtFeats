@@ -64,7 +64,7 @@ Follow these steps to rerun the extraction pipeline:
   
 - Download and uncompress the pretrained word2vec model [GoogleNews-vectors-negative300.bin](https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing)
   
-- Sign up for the [TAGME service](https://tagme.d4science.org/tagme/) to obtain a TAGME token.
+- Sign up for the [TAGME service](https://services.d4science.org/web/tagme/tagme-help) to obtain a TAGME token.
   
 - Modify the _Configurations_ section of `Makefile` to reflect the local changes.
   Then run the task specific targets:
