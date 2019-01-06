@@ -79,7 +79,7 @@ To reproduce our results:
 - Clone the [deep-qa][] package (commit `ca7b5079160908c3e2356dd735c90666fac12a21`).
   Drop the python scripts (**in python 2**) under `cnn` into the `deep-qa` repo.
 
-- In the [deep-qa] repo, follow through the data preparation steps to produce embeddings and model input.
+- In the `deep-qa` repo, follow through the data preparation steps to produce embeddings and model input.
   A model directory (e.g. `TRAIN-ALL` for TREC QA data) will be made available upon completion.
 
 - Generate feature files (`*.svm.gz`) following the previous instructions.
