@@ -16,35 +16,58 @@ If you use the data or code from this repo, please cite the following paper:
 
 ## Data ##
 
-Feature vectors for two question answering benchmarks, TREC QA and WikiQA, are made available in the directory `data`.  The vectors are stored in the SVMLight format, and released in a compressed form (`.gz`).
+Feature vectors for two question answering benchmarks, TREC QA and WikiQA, are made available in the directory `data`.
+The vectors are stored in the SVMLight format, and released in a compressed form (`.svm.gz`).
 
-The data is _NOT_ filtered in any way.  Some prior works remove questions with no positive answers, so additional care needs to be taken when making comparison with or incorporating this data into those approaches.
-
-A complete list of 22 external features (and the respective feature IDs) are given as follows:
+A complete list of 21 external features (and the respective feature IDs) are given as follows:
 
 1. Length
-2. Location
-3. ExactMatch
-4. Overlap
-5. OverlapSyn
-6. LM
-7. BM25
-8. ESA
-9. TAGME
-10. Word2Vec
-11. CPW
-12. SPW
-13. WPS
-14. CWPS
-15. CWR
-16. LWPS
-17. LWR
-18. DaleChall
-19. MatchedNGram[k=2,n=2]
-20. MatchedNGram[k=2,n=3]
-21. MatchedNGram[k=3,n=2]
-22. MatchedNGram[k=3,n=3]
+2. ExactMatch
+3. Overlap
+4. OverlapSyn
+5. LM
+6. BM25
+7. ESA
+8. TAGME
+9. Word2Vec
+10. CPW
+11. SPW
+12. WPS
+13. CWPS
+14. CWR
+15. LWPS
+16. LWR
+17. DaleChall
+18. MatchedNGram[k=2,n=2]
+19. MatchedNGram[k=2,n=3]
+20. MatchedNGram[k=3,n=2]
+21. MatchedNGram[k=3,n=3]
 
-## Note ##
+> The data is _NOT_ filtered in any way.  Some prior works remove questions with no positive answers, so additional care needs to be taken when making comparison with or incorporating this data into those approaches.
 
-Code for feature extraction is to be made available soon.
+## Feature Extraction ##
+
+Feature extraction scripts (all in python 3) are also available in the `data` directory. 
+Follow these steps to rerun the extraction pipeline:
+
+- Extract frequency counts from the GOV2 collection, and store the counts in compressed format
+  in the file `freqstats.gz`. One can simply index the collection using Indri and then use its
+  utility `dump_index` to do the work:
+
+      dumpindex /path/to/index v | gzip > freqstats.gz
+   
+- Build an Indri index over English Wikipedia pages. This can be done by first downloading an [enwiki data
+  dump](https://dumps.wikimedia.org/enwiki/) and then converting wikipages into TRECTEXT format,
+  using DOCNO of the form `ENWIKI_XXXXXXXX` (where `XXXXXXXX` indicates the wikipage number).
+  
+  The enwiki dump used in our experiment was produced in October 2015.
+  
+- Download and uncompress the pretrained word2vec model [GoogleNews-vectors-negative300.bin](https://drive.google.com/file/d/0B7XkCwpI5KDYNlNUTTlSS21pQmM/edit?usp=sharing)
+  
+- Sign up for the [TAGME service](https://services.d4science.org/web/tagme/tagme-help) to obtain a TAGME token.
+  
+- Modify the _Configurations_ section of `Makefile` to reflect the local changes.
+  Then run the task specific targets:
+
+      make trecqa
+      make wikiqa
